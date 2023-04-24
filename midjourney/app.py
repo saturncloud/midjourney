@@ -48,7 +48,9 @@ with st.spinner('Wait for it...'):
         else:
             pass
         url = API_URL + "?" + urlencode({'prompt': text})
-        response = requests.post(url)
+        TOKEN = os.getenv('SATURN_TOKEN')
+        headers = {"Authorization": f"token {TOKEN}"}
+        response = requests.post(url, headers=headers)
         st.image(response.content, caption=text)
 
 
